@@ -1,6 +1,7 @@
 FROM alpine:latest
 
-RUN apk update && apk add --no-cache ca-certificates tzdata
+RUN sed -i 's|dl-cdn.alpinelinux.org|mirrors.sjtug.sjtu.edu.cn|g' /etc/apk/repositories; \
+    apk --update --no-cache add ca-certificates tzdata
 
 ADD https://curl.se/ca/cacert.pem /etc/ssl/certs/
 
