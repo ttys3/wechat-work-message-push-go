@@ -1,6 +1,6 @@
 FROM alpine:latest
 RUN apk update && apk add --no-cache ca-certificates tzdata
-ADD https://github.com/cloverzrg/file/raw/master/ca-certificates.crt /etc/ssl/certs/
+ADD https://curl.se/ca/cacert.pem /etc/ssl/certs/
 ADD wechat-work-message-push-go /app/wechat-work-message-push-go
 EXPOSE 80
 ENV Token my_token
