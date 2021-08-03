@@ -2,32 +2,28 @@ package config
 
 import (
 	"fmt"
-	"os"
+	"github.com/kelseyhightower/envconfig"
 )
 
-type jsonConfig struct {
-	Token      string
+type config struct {
+	Token      string  `envconfig:"TOKEN"`
 	WechatWork struct {
-		DefaultReceiverUserId string
-		CorpId                string
-		CorpSecret            string
-		AgentId               string
+		DefaultReceiverUserId string `envconfig:"WECHATWORK_DEFAULT_RECEIVER_UID"`
+		CorpId                string `envconfig:"WECHATWORK_CORP_ID"`
+		CorpSecret            string `envconfig:"WECHATWORK_CORP_SECRET"`
+		AgentId               string `envconfig:"WECHATWORK_AGENT_ID"`
 	}
-	GrafanaWebhookUser     string
-	GrafanaWebhookPassword string
+	GrafanaWebhookUser     string `envconfig:"GRAFANA_WEBHOOK_USER"`
+	GrafanaWebhookPassword string `envconfig:"GRAFANA_WEBHOOK_PASSWORD"`
 }
 
-var Config jsonConfig
+var Config config
 
 func LoadConfig() (err error) {
-
-	Config.Token = os.Getenv("Token")
-	Config.WechatWork.CorpSecret = os.Getenv("WechatWorkCorpSecret")
-	Config.WechatWork.CorpId = os.Getenv("WechatWorkCorpId")
-	Config.WechatWork.DefaultReceiverUserId = os.Getenv("DefaultReceiverUserId")
-	Config.WechatWork.AgentId = os.Getenv("WechatWorkAgentId")
-	Config.GrafanaWebhookUser = os.Getenv("GrafanaWebhookUser")
-	Config.GrafanaWebhookPassword = os.Getenv("GrafanaWebhookPassword")
-	fmt.Printf("%+v\n", Config)
+	err = envconfig.Process("", &Config)
+	if err != nil {
+		return
+	}
+	fmt.Printf("config=%+v\n", Config)
 	return err
 }

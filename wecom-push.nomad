@@ -33,14 +33,13 @@ job "wecom-push" {
         PORT    = "${NOMAD_PORT_http}"
         NODE_IP = "${NOMAD_IP_http}"
 
-
-        Token                  = "my_token"
-        DefaultReceiverUserId  = "13800138000"
-        WechatWorkCorpId       = "ww741038v8sa88hv36d"
-        WechatWorkCorpSecret   = "USVdvsa_ad2k34jk232kjn-asfefeawf_waeasdf-ase"
-        WechatWorkAgentId      = "1000001"
-        GrafanaWebhookUser     = "admin"
-        GrafanaWebhookPassword = "admin"
+        TOKEN                           = "my_token"
+        WECHATWORK_DEFAULT_RECEIVER_UID = "13800138000"
+        WECHATWORK_CORP_ID              = "ww741038v8sa88hv36d"
+        WECHATWORK_CORP_SECRET          = "USVdvsa_ad2k34jk232kjn-asfefeawf_waeasdf-ase"
+        WECHATWORK_AGENT_ID             = "1000001"
+        GRAFANA_WEBHOOK_USER            = "admin"
+        GRAFANA_WEBHOOK_PASSWORD        = "admin"
       }
 
       driver = "podman"
